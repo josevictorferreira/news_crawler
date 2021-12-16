@@ -1,8 +1,8 @@
 defmodule InfomoneyScraper do
   def run do
     InfoMoney.start
-    InfoMoney.get!("").body
+    "" |> InfoMoney.get! |> RssParser.parse
   end
 end
 
-InfomoneyScraper.run
+InfomoneyScraper.run |> IO.inspect
