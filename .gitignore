@@ -24,3 +24,5 @@ infomoney_scraper-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+Mnesia.nonode@nohost/
