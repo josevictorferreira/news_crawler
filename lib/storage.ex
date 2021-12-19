@@ -1,4 +1,3 @@
-
 defmodule Storage do
   alias :mnesia, as: Mnesia
 

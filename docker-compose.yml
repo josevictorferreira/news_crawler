@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  arangodb:
+    image: arangodb:1.2.6
+    restart: always
+    ports:
+      - 1234:8529
+    environment:
+      - ARANGO_ROOT_PASSWORD=${ARANGO_ROOT_PASSWORD}
+    volumes:
+      - .data/article:/var/lib/arangodb3

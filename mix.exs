@@ -22,7 +22,8 @@ defmodule InfomoneyScraper.MixProject do
   defp deps do
     [
       {:saxy, "~> 1.4"},
-      {:httpoison, "~> 1.7"}
+      {:httpoison, "~> 1.7"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 end
