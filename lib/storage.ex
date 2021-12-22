@@ -1,31 +1,22 @@
 defmodule Storage do
-  alias :mnesia, as: Mnesia
+  alias Storage.Adapter
+  alias Storage.Database
 
-  def init do
-    setup()
+  def init! do
+    Database.start_link
+    create_collection!(Database.conn, "articles")
+    Database.conn
   end
 
-  defp setup do
-    Mnesia.create_schema([node()])
-    Mnesia.start()
-    create_table()
+  def insert_article(data) do
+    doc =
+      data
+      |> Map.merge(%{_key: Utils.hash_key(data[:source] <> data[:title])})
+    insert(Database.conn, "articles", doc)
   end
 
-  defp attributes do
-    [:id, :title, :link, :published_at, :description, :content]
-  end
+  def conn, do: Database.conn
 
-  defp create_table do
-    case Mnesia.create_table(Article, [attributes: attributes]) do
-      {:atomic, :ok} ->
-        Mnesia.add_table_index(Article, :ẗitle)
-      {:aborted, {:already_exists, Article}} ->
-        case Mnesia.table_info(Article, :attributes) do
-          [:id, :title, :link, :published_at, :description, :content] ->
-            :ok
-          other ->
-            {:error, other}
-        end
-    end
-  end
+  defdelegate insert(conn, collection_name, data), to: Adapter
+  defdelegate create_collection!(conn, collection_name), to: Adapter
 end
