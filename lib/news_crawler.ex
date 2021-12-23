@@ -1,7 +1,8 @@
 defmodule NewsCrawler do
   def run do
     children = [
-      Jobs.InfomoneyCrawler
+      Jobs.InfomoneyCrawler,
+      Jobs.ExameCrawler
     ]
     Supervisor.start_link(children, strategy: :one_for_one)
   end

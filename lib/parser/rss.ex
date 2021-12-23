@@ -54,6 +54,14 @@ defmodule Parser.Rss do
     {:ok, data}
   end
 
+  defp rss_data(%HTTPoison.Response{body: {:ok, {"rss", _, [_, {"channel", [], data}, _]}},
+      headers: _,
+      request: _,
+      request_url: _,
+      status_code: 200}) do
+    {:ok, data}
+  end
+
   defp rss_data(_) do
     {:error, "Unable to parse RSS feed."}
   end
