@@ -1,4 +1,4 @@
-defmodule RssParser do
+defmodule Parser.Rss do
   def parse(rss_feed) do
     parse_rss_data(rss_data(rss_feed))
   end

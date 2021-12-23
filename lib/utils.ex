@@ -23,4 +23,8 @@ defmodule Utils do
   def hash_key(value) do
     :crypto.hash(:md5, value) |> Base.encode16
   end
+
+  def scraper_name(module) do
+    module |> to_string |> String.replace(~r/Scraper\./, "") |> String.replace(~r/Elixir\./, "")
+  end
 end

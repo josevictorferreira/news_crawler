@@ -8,11 +8,11 @@ defmodule Storage do
     Database.conn
   end
 
-  def insert_article(data) do
+  def insert_article(conn, data) do
     doc =
       data
       |> Map.merge(%{_key: Utils.hash_key(data[:source] <> data[:title])})
-    insert(Database.conn, "articles", doc)
+    insert(conn, "articles", doc)
   end
 
   def conn, do: Database.conn

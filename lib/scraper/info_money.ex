@@ -1,4 +1,4 @@
-defmodule InfoMoney do
+defmodule Scraper.InfoMoney do
   use HTTPoison.Base
 
   @base_url "https://www.infomoney.com.br/feed/"
