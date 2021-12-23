@@ -11,12 +11,12 @@ defmodule Jobs.InfomoneyCrawler do
   end
 
   def handle_info(:work, state) do
-    Services.ArticleFetcher.perform(Scraper.InfoMoney)
+    Services.ArticleFetcher.perform(Scraper.Infomoney)
     schedule_work()
     {:noreply, state}
   end
 
   defp schedule_work() do
-    Process.send_after(self(), :work, 1 * 60 * 1000) # In 5 minutes
+    Process.send_after(self(), :work, 5 * 60 * 1000) # In 5 minutes
   end
 end

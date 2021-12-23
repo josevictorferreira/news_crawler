@@ -1,9 +1,9 @@
-defmodule InfomoneyScraper.MixProject do
+defmodule NewsCrawler.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :infomoney_scraper,
+      app: :news_crawler,
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,

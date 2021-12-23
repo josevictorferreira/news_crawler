@@ -1,7 +1,7 @@
-defmodule Scraper.InfoMoney do
+defmodule Scraper.Valor do
   use HTTPoison.Base
 
-  @base_url "https://www.infomoney.com.br/feed/"
+  @base_url "https://pox.globo.com/rss/valor"
 
   def process_request_url(url) do
     @base_url <> url

@@ -1,4 +1,4 @@
-defmodule InfomoneyScraper do
+defmodule NewsCrawler do
   def run do
     children = [
       Jobs.InfomoneyCrawler
@@ -7,4 +7,4 @@ defmodule InfomoneyScraper do
   end
 end
 
-InfomoneyScraper.run
+NewsCrawler.run
