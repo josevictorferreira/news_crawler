@@ -1,11 +1,10 @@
 defmodule InfomoneyScraper do
-  alias Scraper.InfoMoney
-  alias Parser.Rss
-
   def run do
-    InfoMoney.start
-    "" |> InfoMoney.get! |> Rss.parse
+    children = [
+      Jobs.InfomoneyCrawler
+    ]
+    Supervisor.start_link(children, strategy: :one_for_one)
   end
 end
 
-InfomoneyScraper.run |> IO.inspect
+InfomoneyScraper.run
