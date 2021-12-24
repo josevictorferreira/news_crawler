@@ -1,12 +1,12 @@
 FROM elixir:1.13-alpine as build
 
-RUN adduser -D app
-
-USER app
-
 ENV MIX_ENV=prod
 
 RUN apk add --update build-base
+
+RUN adduser -D app
+
+USER app
 
 WORKDIR /home/app
 
@@ -17,10 +17,6 @@ COPY mix.exs mix.lock ./
 
 RUN mix do deps.get, deps.compile
 
-COPY priv priv
-
-RUN mix phx.digest
-
 COPY lib lib
 
 RUN mix do compile, release
@@ -29,6 +25,6 @@ FROM build
 
 WORKDIR /home/app
 
-COPY --from=build /app/_build/prod/app_name-*.tar.gz ./
+COPY --from=build /home/app/_build/prod/rel/news_crawler/bin/news_crawler .
 
-CMD ["/bin/bash"]
+CMD ["./news_crawler start"]

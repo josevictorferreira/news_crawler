@@ -1,6 +1,18 @@
 version: "3.9"
 
 services:
+  crawler:
+    container_name: news-crawler
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ARANGO_URL=tcp://arangodb:8529
+      - ARANGO_ROOT_USERNAME=${ARANGO_ROOT_USERNAME}
+      - ARANGO_ROOT_PASSWORD=${ARANGO_ROOT_PASSWORD}
+      - ARANGO_POOL_SIZE=${ARANGO_POOL_SIZE}
+    networks:
+      - app_net
   arangodb:
     container_name: arangodb
     image: arangodb:3.8.4
@@ -11,3 +23,8 @@ services:
       - ARANGO_ROOT_PASSWORD=${ARANGO_ROOT_PASSWORD}
     volumes:
       - .data/article:/var/lib/arangodb3
+    networks:
+      - app_net
+
+networks:
+  app_net:
