@@ -4,10 +4,6 @@ ENV MIX_ENV=prod
 
 RUN apk add --update build-base
 
-RUN adduser -D app
-
-USER app
-
 WORKDIR /home/app
 
 RUN mix local.hex --force && \
@@ -21,10 +17,10 @@ COPY lib lib
 
 RUN mix do compile, release
 
-FROM build
+RUN adduser -D app
+
+USER app
 
 WORKDIR /home/app
 
-COPY --from=build /home/app/_build/prod/rel/news_crawler/bin/news_crawler .
-
-CMD ["./news_crawler start"]
+CMD ["./_build/prod/rel/news_crawler/bin/news_crawler", "start"]

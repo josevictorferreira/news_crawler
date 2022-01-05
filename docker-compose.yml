@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   crawler:
+    image: news-crawler
     container_name: news-crawler
     build:
       context: .
