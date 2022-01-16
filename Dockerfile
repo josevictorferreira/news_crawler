@@ -17,10 +17,16 @@ COPY lib lib
 
 RUN mix do compile, release
 
+WORKDIR /home/app
+
+FROM elixir:1.13-alpine
+
 RUN adduser -D app
 
 USER app
 
 WORKDIR /home/app
 
-CMD ["./_build/prod/rel/news_crawler/bin/news_crawler", "start"]
+COPY --chown=app --from=build /home/app/_build .
+
+CMD ["./prod/rel/news_crawler/bin/news_crawler", "start"]
