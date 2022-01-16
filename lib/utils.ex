@@ -7,15 +7,15 @@ defmodule Utils do
   def db_options do
     load_dotenv!()
     [
-      endpoints: System.get_env("ARANGO_URL"),
-      username: System.get_env("ARANGO_ROOT_USERNAME"),
-      password: System.get_env("ARANGO_ROOT_PASSWORD"),
-      pool_size: System.get_env("ARANGO_POOL_SIZE") |> String.to_integer
+      endpoints: env("ARANGO_URL"),
+      username: env("ARANGO_ROOT_USERNAME"),
+      password: env("ARANGO_ROOT_PASSWORD"),
+      pool_size: env("ARANGO_POOL_SIZE") |> String.to_integer
     ]
   end
 
   def load_dotenv! do
-    if [:dev, :test] |> Enum.member?(Mix.env) do
+    if [:dev, :test] |> Enum.member?(env("MIX_ENV")) do
       Dotenv.load!
     end
   end
@@ -26,5 +26,9 @@ defmodule Utils do
 
   def scraper_name(module) do
     module |> to_string |> String.replace(~r/Scraper\./, "") |> String.replace(~r/Elixir\./, "")
+  end
+
+  def env(key) do
+    System.get_env(key)
   end
 end

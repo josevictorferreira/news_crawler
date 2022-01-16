@@ -14,6 +14,7 @@ defmodule NewsCrawler.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {NewsCrawler, []},
       extra_applications: [:logger, :httpoison, :saxy, :crypto]
     ]
   end
