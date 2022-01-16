@@ -24,10 +24,10 @@ defmodule Jobs.InfomoneyCrawler do
   end
 
   defp job_frequency do
-    frequency_minutes() * 60 * 1000 # 5 minutes interval
+    frequency_minutes() * 60 * 1000
   end
 
   defp frequency_minutes do
-    5
+    Utils.env("INFOMONEY_FREQUENCY_MINUTES") |> String.to_integer
   end
 end

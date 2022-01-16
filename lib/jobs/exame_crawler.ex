@@ -29,6 +29,6 @@ defmodule Jobs.ExameCrawler do
   end
 
   defp frequency_minutes do
-    5
+    Utils.env("EXAME_FREQUENCY_MINUTES") |> String.to_integer
   end
 end
