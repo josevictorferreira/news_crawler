@@ -21,6 +21,8 @@ WORKDIR /home/app
 
 FROM elixir:1.13-alpine
 
+RUN apk add tzdata
+
 RUN adduser -D app
 
 USER app

@@ -14,6 +14,7 @@ services:
       - ARANGO_POOL_SIZE=${ARANGO_POOL_SIZE}
       - EXAME_FREQUENCY_MINUTES=${EXAME_FREQUENCY_MINUTES}
       - INFOMONEY_FREQUENCY_MINUTES=${INFOMONEY_FREQUENCY_MINUTES}
+      - TZ=America/Sao_Paulo
     networks:
       - app_net
   arangodb:
