@@ -10,8 +10,7 @@ defmodule Scraper.Valor do
   def process_response_body(body) do
     body
     |> String.trim()
-    |> String.replace("\n", "")
-    |> String.replace("\t", "")
+    |> String.replace(["\n", "\t"], " ")
     |> Saxy.SimpleForm.parse_string
   end
 end
